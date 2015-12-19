@@ -4,11 +4,11 @@ module Stockfighter
   class Api
     BASE_URL = "https://api.stockfighter.io/ob/api"
 
-    def initialize(key:, account:, symbol:, venue:)
-      @api_key = key
-      @account = account
-      @symbol = symbol
-      @venue = venue
+    def initialize(opts = {})
+      @api_key = opts[:key]
+      @account = opts[:account]
+      @symbol = opts[:symbol]
+      @venue = opts[:venue]
     end
 
     def get_quote
