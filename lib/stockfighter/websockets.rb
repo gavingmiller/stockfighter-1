@@ -6,14 +6,14 @@ module Stockfighter
 
     WS_URL = "https://www.stockfighter.io/ob/api/ws"
 
-    def initialize(key:, account:, symbol:, venue:)
-      @account = account
-      @venue = venue
+    def initialize(opts = {})
+      @account = opts[:account]
+      @venue = opts[:venue]
       @quote_callbacks = []
       @execution_callbacks = []
     end
 
-    def start() 
+    def start()
 
       EM.epoll
       EM.run do
