@@ -7,9 +7,9 @@ module Stockfighter
 
     attr_accessor :instance_id
 
-    def initialize(key:, level:, polling:false)
-      @api_key = key
-      @level = level
+    def initialize(opts = {})
+      @api_key = opts[:key]
+      @level = opts[:level]
 
       @callback_types = ['success', 'info']
       @message_callbacks = Hash.new { |h,k| h[k] = [] }
@@ -18,7 +18,7 @@ module Stockfighter
       new_level_response = perform_request("post", "#{GM_URL}/levels/#{level}")
       previous_state = new_level_response['state']
 
-      if polling
+      if opts[:polling] || false
         # websocket API functionality instead of polling would be great here
         scheduler = Rufus::Scheduler.new(:overlap => false)
         scheduler.every '10s' do
@@ -112,12 +112,12 @@ module Stockfighter
         @config[:venue] = response["venues"][0]
         @config[:symbol] = response["tickers"][0]
 
-        @instance_id = response["instanceId"]        
+        @instance_id = response["instanceId"]
       end
 
       response
     end
- 
+
     private :perform_request
   end
 end
