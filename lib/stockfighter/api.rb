@@ -15,15 +15,15 @@ module Stockfighter
       HTTParty.get("#{BASE_URL}/venues/#{@venue}/stocks/#{@symbol}/quote", {"X-Starfighter-Authorization" => @api_key}).parsed_response
     end
 
-    def place_order(price:, quantity:, direction:, order_type:)
+    def place_order(opts = {})
       order = {
         "account" => @account,
         "venue" => @venue,
         "symbol" => @symbol,
-        "price" => price,
-        "qty" => quantity,
-        "direction" => direction,
-        "orderType" => order_type
+        "price" => opts[:price],
+        "qty" => opts[:quantity],
+        "direction" => opts[:direction],
+        "orderType" => opts[:order_type]
       }
 
       HTTParty.post("#{BASE_URL}/venues/#{@venue}/stocks/#{@symbol}/orders", body: JSON.dump(order),
