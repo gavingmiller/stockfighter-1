@@ -4,6 +4,8 @@ module Stockfighter
   class Api
     BASE_URL = "https://api.stockfighter.io/ob/api"
 
+    attr_accessor :account, :symbol, :venue
+
     def initialize(opts = {})
       @api_key = opts[:key]
       @account = opts[:account]
