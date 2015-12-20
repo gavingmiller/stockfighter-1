@@ -15,7 +15,7 @@ module Stockfighter
       @message_callbacks = Hash.new { |h,k| h[k] = [] }
       @state_change_callbacks = []
 
-      new_level_response = perform_request("post", "#{GM_URL}/levels/#{level}")
+      new_level_response = perform_request("post", "#{GM_URL}/levels/#{@level}")
       previous_state = new_level_response['state']
 
       if opts[:polling] || false
